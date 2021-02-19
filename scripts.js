@@ -6,6 +6,7 @@ snake[0] = {
     x: 8 * box,
     y: 8 * box
 }
+let start = false;
 let direction = "right";
 let food = {
     x: Math.floor(Math.random() * 15 + 1) * box,
@@ -40,7 +41,6 @@ function update (event) {
     if (event.keyCode == 40 && direction != "up") direction = "down";
 }
 
-
 function iniciarJogo() {
     if (snake[0].x > 15 * box && direction == "right") snake[0].x = 0;
     if (snake[0].x < 0 && direction == "left") snake[0].x = 16 * box;
@@ -62,10 +62,12 @@ function iniciarJogo() {
     let snakeX = snake[0].x;
     let snakeY = snake[0].y;
 
-    if (direction == "right") snakeX += box;
-    if (direction == "left") snakeX -= box;
-    if (direction == "up") snakeY -= box;
-    if (direction == "down") snakeY += box;
+    if (start == true) {
+        if (direction == "right") snakeX += box;
+        if (direction == "left") snakeX -= box;
+        if (direction == "up") snakeY -= box;
+        if (direction == "down") snakeY += box;
+    }
 
     if (snakeX != food.x || snakeY != food.y) {
         snake.pop();
